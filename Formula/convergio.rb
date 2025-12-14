@@ -1,42 +1,37 @@
 class Convergio < Formula
   desc "Multi-agent AI orchestration CLI for Apple Silicon"
   homepage "https://github.com/Roberdan/convergio-cli"
-  url "https://github.com/Roberdan/convergio-cli/archive/refs/tags/v5.0.0.tar.gz"
-  sha256 "b4ffb38b3317630e2665b382177f0945e815a2ca938c46487fa8712018013dad"
+  version "5.0.0"
   license "MIT"
-  head "https://github.com/Roberdan/convergio-cli.git", branch: "main"
+
+  on_macos do
+    on_arm do
+      # Note: Tarball uses arm64-apple-darwin naming convention (not darwin-arm64)
+      url "https://github.com/Roberdan/convergio-cli/releases/download/v5.0.0/convergio-5.0.0-arm64-apple-darwin.tar.gz"
+      sha256 "3243586396b7edf7e30849472d43a1c9d37622c5af48308afd912c9d9e974b42"
+    end
+  end
 
   depends_on :macos
   depends_on arch: :arm64
-  depends_on "cjson"
-  depends_on "readline"
-  depends_on xcode: ["16.0", :build]
 
   def install
-    system "make", "clean"
-    system "make"
-    bin.install "build/bin/convergio"
-    # Install metal library if present
-    lib.install "build/bin/default.metallib" if File.exist?("build/bin/default.metallib")
+    bin.install "convergio"
   end
 
   def caveats
     <<~EOS
-      Convergio v5.0.0 has been installed!
-
-      NEW IN v5.0.0:
-        - Anna Executive Assistant with native todo management
-        - MLX Local AI for 100% offline inference
-        - MCP integration for extensible tools
-        - Latest AI models (Dec 2025)
+      Convergio has been installed!
 
       To get started, run:
         convergio setup
 
+      This will configure your Anthropic API key securely in macOS Keychain.
+
       Quick start:
         convergio              # Start interactive session with Ali
-        convergio --local      # Use local AI (no API needed)
         convergio --help       # Show all options
+        convergio update       # Check for and install updates
 
       Documentation: https://github.com/Roberdan/convergio-cli
     EOS
