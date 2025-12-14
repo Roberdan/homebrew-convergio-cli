@@ -2,7 +2,7 @@ class Convergio < Formula
   desc "Multi-agent AI orchestration CLI for Apple Silicon"
   homepage "https://github.com/Roberdan/convergio-cli"
   url "https://github.com/Roberdan/convergio-cli/archive/refs/tags/v5.0.0.tar.gz"
-  sha256 "a2ec9b176048e0eb3c2f628e9db75cc102d77d530a34a292f71439ca393d7212"
+  sha256 "b4ffb38b3317630e2665b382177f0945e815a2ca938c46487fa8712018013dad"
   license "MIT"
   head "https://github.com/Roberdan/convergio-cli.git", branch: "main"
 
