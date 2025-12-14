@@ -2,7 +2,7 @@ class Convergio < Formula
   desc "Multi-agent AI orchestration CLI for Apple Silicon"
   homepage "https://github.com/Roberdan/convergio-cli"
   url "https://github.com/Roberdan/convergio-cli/archive/refs/tags/v5.0.0.tar.gz"
-  sha256 :no_check  # Will be updated after first successful build
+  sha256 "a2ec9b176048e0eb3c2f628e9db75cc102d77d530a34a292f71439ca393d7212"
   license "MIT"
   head "https://github.com/Roberdan/convergio-cli.git", branch: "main"
 
@@ -32,8 +32,6 @@ class Convergio < Formula
 
       To get started, run:
         convergio setup
-
-      This will configure your API keys securely in macOS Keychain.
 
       Quick start:
         convergio              # Start interactive session with Ali
