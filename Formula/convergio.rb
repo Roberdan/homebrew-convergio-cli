@@ -1,14 +1,13 @@
 class Convergio < Formula
   desc "Multi-agent AI orchestration CLI for Apple Silicon"
   homepage "https://github.com/Roberdan/convergio-cli"
-  version "4.2.0"
+  version "5.0.0"
   license "MIT"
 
   on_macos do
     on_arm do
-      # Note: Tarball uses arm64-apple-darwin naming convention (not darwin-arm64)
-      url "https://github.com/Roberdan/convergio-cli/releases/download/v4.2.0/convergio-4.2.0-arm64-apple-darwin.tar.gz"
-      sha256 "23ef35c8b4f4a54544c0c4fe7b48aedd0e0c06e5fa39a89e6bdd1d9a3cba99de"
+      url "https://github.com/Roberdan/convergio-cli/releases/download/v5.0.0/convergio-5.0.0-arm64-apple-darwin.tar.gz"
+      sha256 "5133cf7e1c10f4052e6efcebec2179e1355d88c59858b67f621bdb89843f2faf"
     end
   end
 
@@ -21,17 +20,23 @@ class Convergio < Formula
 
   def caveats
     <<~EOS
-      Convergio has been installed!
+      Convergio v5.0.0 has been installed!
+
+      NEW IN v5.0.0:
+        - Anna Executive Assistant with native todo management
+        - MLX Local AI for 100% offline inference
+        - MCP integration for extensible tools
+        - Latest AI models (Dec 2025)
 
       To get started, run:
         convergio setup
 
-      This will configure your Anthropic API key securely in macOS Keychain.
+      This will configure your API keys securely in macOS Keychain.
 
       Quick start:
         convergio              # Start interactive session with Ali
+        convergio --local      # Use local AI (no API needed)
         convergio --help       # Show all options
-        convergio update       # Check for and install updates
 
       Documentation: https://github.com/Roberdan/convergio-cli
     EOS
