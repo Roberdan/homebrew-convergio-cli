@@ -14,6 +14,7 @@ class Convergio < Formula
 
   depends_on :macos
   depends_on arch: :arm64
+  depends_on "readline"
 
   def install
     bin.install "convergio"
