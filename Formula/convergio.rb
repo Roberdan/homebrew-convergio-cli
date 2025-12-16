@@ -1,14 +1,14 @@
 class Convergio < Formula
   desc "Multi-agent AI orchestration CLI for Apple Silicon"
   homepage "https://github.com/Roberdan/convergio-cli"
-  version "5.1.0"
+  version "5.2.0"
   license "MIT"
 
   on_macos do
     on_arm do
       # Note: Tarball uses arm64-apple-darwin naming convention (not darwin-arm64)
-      url "https://github.com/Roberdan/convergio-cli/releases/download/v5.1.0/convergio-5.1.0-arm64-apple-darwin.tar.gz"
-      sha256 "c970d67224a514790668872207cfc47797ab14382f42c2c4532891521cedbc51"
+      url "https://github.com/Roberdan/convergio-cli/releases/download/v5.2.0/convergio-5.2.0-arm64-apple-darwin.tar.gz"
+      sha256 "e0e0146ef0d3e8741789c44eae1ccb0ae4a4a150cf866b91d97156fd7b691088"
     end
   end
 
@@ -17,6 +17,22 @@ class Convergio < Formula
 
   def install
     bin.install "convergio"
+    # Install notification helper app if included in release
+    if File.directory?("ConvergioNotify.app")
+      prefix.install "ConvergioNotify.app"
+    end
+  end
+
+  def post_install
+    # Symlink notification helper to /Applications for system-wide access
+    notify_app = prefix/"ConvergioNotify.app"
+    if notify_app.exist?
+      target = Pathname.new("/Applications/ConvergioNotify.app")
+      target.rmtree if target.exist?
+      FileUtils.cp_r(notify_app, target)
+      # Register with Launch Services
+      system "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister", "-f", target
+    end
   end
 
   def caveats
@@ -32,6 +48,11 @@ class Convergio < Formula
         convergio              # Start interactive session with Ali
         convergio --help       # Show all options
         convergio update       # Check for and install updates
+
+      Notifications:
+        The notification helper (ConvergioNotify.app) has been installed to
+        /Applications for reminder notifications with the Convergio icon.
+        You may need to allow notifications in System Settings > Notifications.
 
       Documentation: https://github.com/Roberdan/convergio-cli
     EOS
