@@ -1,14 +1,14 @@
 class Convergio < Formula
   desc "Multi-agent AI orchestration CLI for Apple Silicon"
   homepage "https://github.com/Roberdan/convergio-cli"
-  version "5.2.1"
+  version "5.2.2"
   license "MIT"
 
   on_macos do
     on_arm do
       # Note: Tarball uses arm64-apple-darwin naming convention (not darwin-arm64)
-      url "https://github.com/Roberdan/convergio-cli/releases/download/v5.2.1/convergio-5.2.1-arm64-apple-darwin.tar.gz"
-      sha256 "5d3d75b1e1db7db1452e7fe40b2726d6e6034d823dde0a5b2f9c3f306bdd5ece"
+      url "https://github.com/Roberdan/convergio-cli/releases/download/v5.2.2/convergio-5.2.2-arm64-apple-darwin.tar.gz"
+      sha256 "4a2d2498837d627f5612ccd688c4f471c5d784485345f8cc22cca6f50b752554"
     end
   end
 
