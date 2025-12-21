@@ -8,7 +8,7 @@ class Convergio < Formula
     on_arm do
       # Note: Tarball uses arm64-apple-darwin naming convention (not darwin-arm64)
       url "https://github.com/Roberdan/convergio-cli/releases/download/v5.4.0/convergio-5.4.0-arm64-apple-darwin.tar.gz"
-      sha256 "dab581ff043feb28922ad5e1a348c78cde041458c28b6f180998c11453fc5a71"
+      sha256 "a2b17957be4871331e18dcddcac4090d6697c146a8909893bfc0cf321c30f66c"
     end
   end
 
