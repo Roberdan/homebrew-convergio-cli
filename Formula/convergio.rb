@@ -1,13 +1,13 @@
 class Convergio < Formula
   desc "Multi-agent AI orchestration CLI for Apple Silicon"
   homepage "https://github.com/Roberdan/convergio-cli"
-  version "6.0.0"
+  version "6.0.1"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/Roberdan/convergio-cli/releases/download/v6.0.0/convergio-6.0.0-arm64-apple-darwin.tar.gz"
-      sha256 "24995873794356027154c53048be562cf0e06161475c1e6914e5a6ff3573e8b1"
+      url "https://github.com/Roberdan/convergio-cli/releases/download/v6.0.1/convergio-6.0.1-arm64-apple-darwin.tar.gz"
+      sha256 "008bc06d25264dd4153f75e8fb63da18d786d3ff16f35e0a4907997e6ba993fa"
     end
   end
 
@@ -16,30 +16,42 @@ class Convergio < Formula
 
   def install
     bin.install "convergio"
-    # Install Metal shaders for GPU acceleration
-    if File.exist?("default.metallib")
-      (share/"convergio").install "default.metallib"
+    # Install notification helper app if included in release
+    if File.directory?("ConvergioNotify.app")
+      prefix.install "ConvergioNotify.app"
+    end
+  end
+
+  def post_install
+    # Symlink notification helper to /Applications for system-wide access
+    notify_app = prefix/"ConvergioNotify.app"
+    if notify_app.exist?
+      target = Pathname.new("/Applications/ConvergioNotify.app")
+      target.rmtree if target.exist?
+      FileUtils.cp_r(notify_app, target)
+      # Register with Launch Services
+      system "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister", "-f", target
     end
   end
 
   def caveats
     <<~EOS
-      Convergio v6.0.0 has been installed!
+      Convergio has been installed!
 
       To get started, run:
         convergio setup
 
-      This will configure your API keys securely in macOS Keychain.
+      This will configure your Anthropic API key securely in macOS Keychain.
 
       Quick start:
         convergio              # Start interactive session with Ali
         convergio --help       # Show all options
-        convergio update       # Check for updates
+        convergio update       # Check for and install updates
 
-      Other editions available:
-        convergio-edu          # Education Edition (Scuola 2026)
-        convergio-biz          # Business Edition
-        convergio-dev          # Developer Edition
+      Notifications:
+        The notification helper (ConvergioNotify.app) has been installed to
+        /Applications for reminder notifications with the Convergio icon.
+        You may need to allow notifications in System Settings > Notifications.
 
       Documentation: https://github.com/Roberdan/convergio-cli
     EOS
