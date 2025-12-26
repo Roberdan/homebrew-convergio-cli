@@ -1,13 +1,13 @@
 class ConvergioDev < Formula
   desc "Convergio Developer Edition - AI agents for code review, DevOps & security"
   homepage "https://github.com/Roberdan/convergio-cli"
-  version "6.1.0"
+  version "6.2.0"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/Roberdan/convergio-cli/releases/download/v6.1.0/convergio-dev-6.1.0-arm64-apple-darwin.tar.gz"
-      sha256 "1cde7d883f4b47ffec25862405446e7dc78811c61b1528cbdb1f9c394170f6fd"
+      url "https://github.com/Roberdan/convergio-cli/releases/download/v6.2.0/convergio-dev-6.2.0-arm64-apple-darwin.tar.gz"
+      sha256 "1afc072232d6aa5a01e62cee6eedba559b4ddc857165fe93c70401da1ffedf71"
     end
   end
 
