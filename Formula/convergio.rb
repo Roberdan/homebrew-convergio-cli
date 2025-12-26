@@ -26,11 +26,22 @@ class Convergio < Formula
     # Symlink notification helper to /Applications for system-wide access
     notify_app = prefix/"ConvergioNotify.app"
     if notify_app.exist?
-      target = Pathname.new("/Applications/ConvergioNotify.app")
-      target.rmtree if target.exist?
-      FileUtils.cp_r(notify_app, target)
-      # Register with Launch Services
-      system "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister", "-f", target
+      begin
+        target = Pathname.new("/Applications/ConvergioNotify.app")
+        # Remove existing if present (may require permissions)
+        if target.exist?
+          FileUtils.rm_rf(target) rescue nil
+        end
+        # Copy to /Applications
+        FileUtils.cp_r(notify_app, target) rescue nil
+        # Register with Launch Services if copy succeeded
+        if target.exist?
+          system "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister", "-f", target
+        end
+      rescue => e
+        opoo "Could not install ConvergioNotify.app to /Applications: #{e.message}"
+        opoo "You can manually copy it from #{notify_app}"
+      end
     end
   end
 
