@@ -1,13 +1,13 @@
 class ConvergioEdu < Formula
   desc "Convergio Education Edition - AI Maestri teachers for K-12 students"
   homepage "https://github.com/Roberdan/convergio-cli"
-  version "6.0.2"
+  version "6.1.0"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/Roberdan/convergio-cli/releases/download/v6.0.2/convergio-edu-6.0.2-arm64-apple-darwin.tar.gz"
-      sha256 "d820d4da87486e09de840261835e81df3ae840383acab460163e6ee7ad743b99"
+      url "https://github.com/Roberdan/convergio-cli/releases/download/v6.1.0/convergio-edu-6.1.0-arm64-apple-darwin.tar.gz"
+      sha256 "fa54e64344e678652324082de0f1d27a1573007aa38161a102a7affddd637a7f"
     end
   end
 
