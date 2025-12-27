@@ -1,13 +1,13 @@
 class ConvergioDev < Formula
   desc "Convergio Developer Edition - AI agents for code review, DevOps & security"
   homepage "https://github.com/Roberdan/convergio-cli"
-  version "6.3.0"
+  version "6.4.0"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/Roberdan/convergio-cli/releases/download/v6.3.0/convergio-dev-6.3.0-arm64-apple-darwin.tar.gz"
-      sha256 "980de92edd98cdb617fe11a3df31d758cca8854f5028dd509b1a45cda0be983d"
+      url "https://github.com/Roberdan/convergio-cli/releases/download/v6.4.0/convergio-dev-6.4.0-arm64-apple-darwin.tar.gz"
+      sha256 "10d9a8f764edd11df761e447e1353c0ad036314b0b7e61a02ef885d7fc87ee6d"
     end
   end
 
@@ -16,6 +16,13 @@ class ConvergioDev < Formula
 
   def install
     bin.install "convergio-dev"
+    # Install Metal libraries for MLX local models
+    if File.exist?("mlx.metallib")
+      bin.install "mlx.metallib"
+    end
+    if File.exist?("default.metallib")
+      bin.install "default.metallib"
+    end
   end
 
   def caveats
